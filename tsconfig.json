@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist",
+    "isolatedModules": false,
+    "target": "ESNext",
+    "skipLibCheck": true,
+    "noEmit": false,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "paths": {
+      "~src/*": [
+        "./src/*"
+      ]
+    },
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "strict": false,
+    "pretty": true,
+    "noUnusedLocals": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "noUnusedParameters": false,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "exclude": [
+    "dist",
+    "__tests__",
+    "src/**/*.test.ts"
+  ],
+  "include": [
+    "**/*.ts"
+  ]
+}
