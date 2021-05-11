@@ -1,7 +1,11 @@
-import { readFileSync } from "fs";
+const QUERY = `CREATE TABLE IF NOT EXISTS USERS (id INTEGER PRIMARY KEY, uname nvarchar(50));`;
 
 export const createTable = async () => {
-  await global.db.exec(readFileSync(__dirname + "/users.sql").toString());
+  try {
+    await global.db.exec(QUERY);
+  } catch (error) {
+    console.log("❌ err: ", error);
+  }
 };
 
 export interface IUsersModel {

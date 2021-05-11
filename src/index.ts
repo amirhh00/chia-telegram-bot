@@ -4,22 +4,25 @@ import { middleware1, MyContext } from "./middlewares";
 import { botEvents } from "./events";
 
 export const start = async () => {
-  require("dotenv").config();
-  await import("./config/db");
-  const agent = new SocksProxyAgent("socks://127.0.0.1:9150");
+  try {
+    require("dotenv").config();
+    await import("./config/db");
+    const agent = new SocksProxyAgent("socks://tor:9150");
 
-  const telegraf = new Telegraf<MyContext>(process.env.TOKEN, {
-    telegram: { agent },
-  });
+    const telegraf = new Telegraf<MyContext>(process.env.TOKEN, {
+      telegram: { agent },
+    });
 
-  const bot = (global.bot = telegraf.use(middleware1));
-  botEvents(bot);
+    const bot = (global.bot = telegraf.use(middleware1));
+    botEvents(bot);
 
-  bot.launch();
-
-  // Enable graceful stop
-  process.once("SIGINT", () => telegraf.stop("SIGINT"));
-  process.once("SIGTERM", () => telegraf.stop("SIGTERM"));
+    bot.launch();
+    // Enable graceful stop
+    process.once("SIGINT", () => telegraf.stop("SIGINT"));
+    process.once("SIGTERM", () => telegraf.stop("SIGTERM"));
+  } catch (error) {
+    console.log("❌ error : ", error);
+  }
 };
 
 start();

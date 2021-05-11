@@ -5,7 +5,7 @@ services:
     container_name: tor-socks-proxy
     restart: always
     healthcheck:
-      test: test curl --socks5-hostname 127.0.0.1:9150 https://ipinfo.tw/ip
+      test: curl --socks5-hostname 127.0.0.1:9150 https://ipinfo.tw/ip
       interval: 10s
       start_period: 30s
     networks:
@@ -14,12 +14,12 @@ services:
       - 9150:9150
 
   node:
+    env_file: .env
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        DB_HOST: ${DB_HOST}
-        DB_NAME: ${DB_NAME}
+        DB_HOST: ${TOKEN}
         PORT: ${PORT}
     ports:
       - "3005:3005"
@@ -30,7 +30,7 @@ services:
         condition: service_healthy
     volumes:
       - node_modules:/app/node_modules
-      - ~/CHIA.db:/app/CHIA.db
+      - dbdata:/tmp/CHIA.db
     tty: true
     restart: unless-stopped
     stdin_open: false
@@ -41,3 +41,4 @@ networks:
 
 volumes:
   node_modules:
+  dbdata:

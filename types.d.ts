@@ -19,6 +19,6 @@ declare namespace NodeJS {
 }
 
 declare module "*.sql" {
-  const value: string; // Add better type definitions here if desired.
+  const value: string;
   export default value;
 }
