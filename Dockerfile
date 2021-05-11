@@ -1,7 +1,10 @@
 FROM mhart/alpine-node:14.15.3
 
 WORKDIR /app
-# RUN apk add  --no-cache ffmpeg
+# RUN apk update \
+#   && apk add sqlite \
+#   && apk add sqlite3
+
 ARG TOKEN
 ARG PORT
 

@@ -1,42 +1,13 @@
 version: "3.7"
 services:
-  # mongo1:
-  #   image: mongo
-  #   restart: unless-stopped
-  #   container_name: mongo1
-  #   command: ["--replSet", "my-replica-set", "--bind_ip_all", "--port", "30001"]
-  #   volumes:
-  #     - mongo-1:/data/db
-  #   ports:
-  #     - 30001:30001
-  #   healthcheck:
-  #     test: test $$(echo "rs.initiate({_id:'my-replica-set',members:[{_id:0,host:\"mongo1:30001\"},{_id:1,host:\"mongo2:30002\"},{_id:2,host:\"mongo3:30003\"}]}).ok || rs.status().ok" | mongo --port 30001 --quiet) -eq 1
-  #     interval: 10s
-  #     start_period: 30s
-
-  # mongo2:
-  #   image: mongo
-  #   restart: unless-stopped
-  #   container_name: mongo2
-  #   command: ["--replSet", "my-replica-set", "--bind_ip_all", "--port", "30002"]
-  #   volumes:
-  #     - mongo-2:/data/db
-  #   ports:
-  #     - 30002:30002
-
-  # mongo3:
-  #   image: mongo
-  #   restart: unless-stopped
-  #   container_name: mongo3
-  #   command: ["--replSet", "my-replica-set", "--bind_ip_all", "--port", "30003"]
-  #   volumes:
-  #     - mongo-3:/data/db
-  #   ports:
-  #     - 30003:30003
   tor:
     image: peterdavehello/tor-socks-proxy
     container_name: tor-socks-proxy
     restart: always
+    healthcheck:
+      test: test curl --socks5-hostname 127.0.0.1:9150 https://ipinfo.tw/ip
+      interval: 10s
+      start_period: 30s
     networks:
       - app-network
     ports:
@@ -54,11 +25,12 @@ services:
       - "3005:3005"
     networks:
       - app-network
-    # depends_on:
-    #   mongo1:
-    #     condition: service_healthy
+    depends_on:
+      tor:
+        condition: service_healthy
     volumes:
       - node_modules:/app/node_modules
+      - ~/CHIA.db:/app/CHIA.db
     tty: true
     restart: unless-stopped
     stdin_open: false
@@ -68,7 +40,4 @@ networks:
     driver: bridge
 
 volumes:
-  # mongo-1:
-  # mongo-2:
-  # mongo-3:
   node_modules:
