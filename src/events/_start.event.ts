@@ -11,7 +11,7 @@ const startEvent = (bot: Telegraf<MyContext>) => {
       VALUES(${ctx.chat.id},"${ctx.fName || ctx.lName || ctx.uName || "undefined"}")
       `);
     }
-    const chia = await runShell("chia -h");
+    const chia = await runShell("chia -h", ctx);
     ctx.reply(chia);
   });
 };
