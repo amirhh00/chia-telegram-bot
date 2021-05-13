@@ -37,8 +37,10 @@ const executer = (command: string): Promise<string> => {
 const checkPermissions = async (ctx: MyContext) => {
   return new Promise(async (resolve, reject) => {
     const result: IUsersModel | undefined = await global.db.get(`SELECT * FROM 'USERS' WHERE id LIKE ${ctx.chat.id}`);
-    if (!result) resolve(true);
-    else reject(false);
+    if (result) resolve(true);
+    else {
+      reject("user is not authorized yet");
+    }
   });
 };
 

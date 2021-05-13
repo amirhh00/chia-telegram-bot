@@ -30,9 +30,8 @@ services:
       tor:
         condition: service_healthy
     volumes:
-      # - ./.ssh/:/root/.ssh/
       - node_modules:/app/node_modules
-      - dbdata:/tmp/CHIA.db
+      - dbdata:/tmp/CHIA/
     tty: true
     restart: unless-stopped
     stdin_open: false
