@@ -2,8 +2,8 @@ FROM mhart/alpine-node:14.15.3
 
 WORKDIR /app
 RUN apk update \
-  && apk add openssh-client
-#   && apk add sqlite3 \
+  && apk add openssh 
+# && apk add sqlite3 
 #   && apk add sqli...
 
 ARG TOKEN

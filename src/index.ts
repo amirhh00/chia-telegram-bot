@@ -7,7 +7,7 @@ export const start = async () => {
   try {
     require("dotenv").config();
     await import("./config/db");
-    const agent = new SocksProxyAgent("socks://tor:9150");
+    const agent = new SocksProxyAgent(`socks://${process.env.NODE_ENV === "production" ? "tor" : "127.0.0.1"}:9150`);
 
     const telegraf = new Telegraf<MyContext>(process.env.TOKEN, {
       telegram: { agent },

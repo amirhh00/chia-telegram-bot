@@ -16,6 +16,7 @@ services:
   node:
     env_file: .env
     build:
+      network: host
       context: .
       dockerfile: Dockerfile
       args:
@@ -29,6 +30,7 @@ services:
       tor:
         condition: service_healthy
     volumes:
+      - ./.ssh/:/root/.ssh/
       - node_modules:/app/node_modules
       - dbdata:/tmp/CHIA.db
     tty: true

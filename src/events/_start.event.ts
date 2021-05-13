@@ -1,4 +1,5 @@
 import { Telegraf } from "telegraf";
+import runShell from "../helpers/shell";
 import { MyContext } from "../middlewares";
 import { IUsersModel } from "../models/users";
 
@@ -10,7 +11,8 @@ const startEvent = (bot: Telegraf<MyContext>) => {
       VALUES(${ctx.chat.id},"${ctx.fName || ctx.lName || ctx.uName || "undefined"}")
       `);
     }
-    ctx.reply("Welcome");
+    const chia = await runShell("chia -h");
+    ctx.reply(chia);
   });
 };
 
