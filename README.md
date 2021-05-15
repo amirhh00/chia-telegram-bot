@@ -1,4 +1,4 @@
-# chia-telegram-bot
+# chia-telegram-bot (not working yet)
 
 a telegram bot designed for chia farmer running on raspberry pi and get farm stats via telegram bot behind tor proxy <br />
 this bot can talk to chia, installed on raspberry pi 4 from docker container using ssh <br />
