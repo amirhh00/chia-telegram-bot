@@ -1,7 +1,7 @@
 import { Telegraf } from "telegraf";
 import { SocksProxyAgent } from "socks-proxy-agent";
 import { middleware1, MyContext } from "./middlewares";
-import { botEvents } from "./events";
+import { routes } from "./events";
 
 export const start = async () => {
   try {
@@ -14,7 +14,7 @@ export const start = async () => {
     });
 
     const bot = (global.bot = telegraf.use(middleware1));
-    botEvents(bot);
+    routes(bot);
 
     bot.launch();
     // Enable graceful stop

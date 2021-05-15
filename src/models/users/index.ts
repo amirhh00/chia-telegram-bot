@@ -1,6 +1,6 @@
 const QUERY = `CREATE TABLE IF NOT EXISTS USERS (id INTEGER PRIMARY KEY, uname nvarchar(50));`;
 
-export const createTable = async () => {
+export const createUserTable = async () => {
   try {
     await global.db.exec(QUERY);
   } catch (error) {

@@ -2,10 +2,10 @@ import { exec } from "child_process";
 import { MyContext } from "~src/middlewares";
 import { IUsersModel } from "~src/models/users";
 
-export const runShell = async (command: string, ctx: MyContext): Promise<string> => {
+export const runShell = async (command: string, ctx: MyContext, ignoreAuth: boolean = false): Promise<string> => {
   let stdout: string;
   try {
-    await checkPermissions(ctx);
+    if (ignoreAuth) await checkPermissions(ctx);
     stdout = await executer(command);
     return stdout;
   } catch (error) {

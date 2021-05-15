@@ -1,0 +1,13 @@
+Todo:
+  ✔ add a new table for password @started(21-05-14 18:51) @done(21-05-15 18:00) @lasted(23h9m20s)
+  ✔ ask for password on /start command in the bot @started(21-05-14 18:51) @done(21-05-15 18:00) @lasted(23h9m20s)
+  ✔ save hashed password using user's salt saved in .env @started(21-05-14 18:51) @done(21-05-15 18:00) @lasted(23h9m20s)
+  ✔ ask for password if user.id is not exists in USERs table @started(21-05-14 18:51) @done(21-05-15 18:00) @lasted(23h9m20s)
+  ☐ add an ability to update the whole project to the latest version (ssh user@host ./update.sh >/tmp/out.log 2>/tmp/err.log & )
+  ☐ send our public key to bot container and start a new ssh session
+  ☐ 
+
+Future:
+
+Archive:
+  

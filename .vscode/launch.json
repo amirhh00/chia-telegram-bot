@@ -2,14 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "bashdb",
-      "request": "launch",
-      "name": "Bash-Debug (select script from list of sh files)",
-      "cwd": "${workspaceFolder}",
-      "program": "${command:SelectScriptName}",
-      "args": []
-    },
-    {
       "type": "node",
       "request": "launch",
       "name": "Launch Server",
@@ -32,6 +24,14 @@
         "NODE_ENV": "development"
       },
       "sourceMaps": true,
-    }
+    },
+    {
+      "type": "bashdb",
+      "request": "launch",
+      "name": "Bash-Debug (select script from list of sh files)",
+      "cwd": "${workspaceFolder}",
+      "program": "${command:SelectScriptName}",
+      "args": []
+    },
   ]
 }
