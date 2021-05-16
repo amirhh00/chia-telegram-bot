@@ -1,4 +1,5 @@
-import { Context, Middleware } from "telegraf";
+import { Context, Middleware } from 'telegraf';
+import { checkAuthentication } from '~src/helpers';
 
 export interface MyContext extends Context {
   myProp?: string;
@@ -8,9 +9,14 @@ export interface MyContext extends Context {
 }
 
 export const middleware1: Middleware<MyContext> = async (ctx, next) => {
-  ctx.fName = (ctx.chat as any).first_name;
-  ctx.lName = (ctx.chat as any).last_name;
-  ctx.uName = (ctx.chat as any).username;
-  await next(); // runs next middleware
-  // runs after next middleware finishes
+  ctx.fName = (ctx.chat as any)?.first_name;
+  ctx.lName = (ctx.chat as any)?.last_name;
+  ctx.uName = (ctx.chat as any)?.username;
+  try {
+    await checkAuthentication(ctx);
+    await next(); // runs next middleware
+  } catch (error) {
+    console.log('err : ', error);
+    ctx.reply(JSON.stringify(error));
+  }
 };

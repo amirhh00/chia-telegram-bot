@@ -1,4 +1,5 @@
-FROM mhart/alpine-node:14.15.3
+# FROM mhart/alpine-node:14.15.3
+FROM mhart/alpine-node:16.1.0
 
 WORKDIR /app
 RUN apk update \
