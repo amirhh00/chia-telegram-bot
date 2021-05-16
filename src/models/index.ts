@@ -1,5 +1,5 @@
-import { createPasswordTable } from "./password";
-import { createUserTable } from "./users";
+import { createPasswordTable } from './password';
+import { createUserTable } from './users';
 
 export default (async () => {
   // call all create tables here

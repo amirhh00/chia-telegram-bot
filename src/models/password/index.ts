@@ -4,7 +4,7 @@ export const createPasswordTable = async () => {
   try {
     await global.db.exec(QUERY);
   } catch (error) {
-    console.log("❌ err: ", error);
+    console.log('❌ err: ', error);
   }
 };
 
