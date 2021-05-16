@@ -4,7 +4,7 @@ import runShell from '../helpers/shell';
 
 const statsEvent = (bot: Telegraf<MyContext>) => {
   bot.command('stats', async (ctx) => {
-    const chia = await runShell('chia -h', ctx);
+    const chia = await runShell('chia show -s');
     ctx.reply(chia);
   });
 };

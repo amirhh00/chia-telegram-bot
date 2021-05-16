@@ -11,25 +11,25 @@ export const SET_NEW_PASS_ERROR = 'no password exists';
 export const checkAuthentication = async (ctx: MyContext) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const result: IUsersModel | undefined = await global.db.get(`SELECT * FROM USERS WHERE id LIKE ${ctx.chat.id}`);
-      if (result) {
+      const useExists: IUsersModel | undefined = await global.db.get(`SELECT * FROM USERS WHERE id LIKE ${ctx.chat.id}`);
+      if (useExists) {
         resolve(true);
       } else {
-        const result2 = await checkReplies(ctx);
-        if (result2 === null) {
+        const replyResult = await checkReplies(ctx);
+        if (replyResult === null) {
           const isPasswordExists = await global.db.get(`SELECT * FROM PASSWORDS`);
           if (!isPasswordExists) {
             ctx.reply(SET_NEW_PASS, Markup.forceReply());
-            await new Promise((r) => setTimeout(() => r(true), 50));
             reject(SET_NEW_PASS_ERROR);
           }
           reject(ENTER_PASS_ERROR);
-          await new Promise((r) => setTimeout(() => r(true), 50));
           ctx.reply(ENTER_PASS, Markup.forceReply());
+        } else {
+          resolve(true);
         }
       }
     } catch (error) {
-      console.log('err : ', error);
+      reject(error);
     }
   });
 };
